@@ -15,7 +15,7 @@ const subtemasPorDificultad = {
     javascript: {
         facil: ["Declaración de Variables (var, let, const)", "Tipos de Datos Primitivos", "Arrays", "Funciones Básicas", "Condicionales"],
         medio: ["Objetos y Propiedades", "DOM Básico", "Funciones Flecha", "Event Listeners", "JSON"],
-        dificil: ["Asincronía (Promises, async/await)", "Closures", "Prototipos", "ES6+ Features", "Modules"]
+        dificil: ["Asincronía (Promises, async/await)", "Closures", "Prototipos", "ES6+ Features", "Módulos"]
     },
     php: {
         facil: ["Sintaxis Básica y Variables", "Estructuras de Control (if, else)", "Arrays Simples", "Funciones Básicas", "Formularios"],
