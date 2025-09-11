@@ -1,0 +1,25 @@
+# Versión de la sintaxis de Docker Compose
+version: '3.8'
+
+# Definición de los servicios (contenedores)
+services:
+  # Nombre que le damos a nuestro servicio de frontend
+  frontend:
+    # Nombre que tendrá el contenedor una vez creado
+    container_name: mi-frontend-vite
+    
+    # Configuración de la construcción (build)
+    build:
+      # El contexto es el directorio actual ('.'), donde está el Dockerfile
+      context: .
+      # Aquí pasamos los argumentos de construcción (build args)
+      args:
+        # La variable VITE_API_URL que tu Dockerfile espera.
+        # ¡Ajusta esta URL si cambia la IP de tu backend!
+        - VITE_API_URL=http://100.107.10.77:5000
+        
+    # Mapeo de puertos
+    ports:
+      # Mapea el puerto 8080 de tu máquina (el que visitas en el navegador)
+      # al puerto 80 del contenedor (donde Nginx está escuchando).
+      - "8080:80"
