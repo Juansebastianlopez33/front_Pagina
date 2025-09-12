@@ -1,0 +1,394 @@
+{
+    "home": {
+        "document_title": "Inicio | Gods Of Eternia",
+        "welcome_title": "Bienvenidos a Gods of Eternia",
+        "welcome_subtitle": "Sumérgete en un mundo épico de fantasía medieval donde los dioses caminan entre los mortales.",
+        "play_button": "Jugar Ahora",
+        "feature_title": "Desde el Escritorio del Cronista",
+        "feature_subtitle": "Explora las leyendas, hazañas y misterios de Eternia contados por sus propios héroes.",
+        "blog_button": "Ir al Blog"
+      },
+    "header": {
+        "home": "Inicio",
+        "about": "Acerca de",
+        "login": "Iniciar Sesión",
+        "register": "Registrarse",
+        "my_account": "Mi Cuenta",
+        "my_profile": "Mi perfil",
+        "logout": "Cerrar sesión"
+    },
+    "about": {
+        "brayan_alt": "Foto de Brayan",
+        "brayan_name": "Brayan Penagos",
+        "brayan_bio": "¡Hola! Soy desarrollador Front-End. Me apasiona ser el puente entre el diseño creativo y la funcionalidad técnica, construyendo experiencias web que no solo se vean bien, sino que se sientan increíbles para el usuario.",
+        "sebastian_alt": "Foto de Sebastián",
+        "sebastian_name": "Sebastián López",
+        "sebastian_bio": "Hola, soy un desarrollador que se enfoca en backend, esforzándome al máximo para que todos nuestros usuarios tengan una experiencia optimizada y segura.",
+        "ian_alt": "Foto de Ian",
+        "ian_name": "Ian Morales",
+        "ian_bio": "Me encanta la programación y la resolución de problemas. Siempre busco mejorar y aprender más sobre el desarrollo web."
+    },
+    "blog": {
+        "document_title": "Crónicas de Eternia | Blog",
+        "loading": "Cargando crónicas de Eternia...",
+        "title": "Crónicas de Eternia",
+        "create_button": "+ Forjar Nueva Crónica",
+        "back_button": "← Volver a Crónicas",
+        "all_posts": "Todas las Crónicas",
+        "read_button": "⚔️ Leer Crónica",
+        "empty_state": "🏰 Aún no se han escrito crónicas. ¡Sé el primero en forjar una leyenda! ⚔️",
+        "notifications": {
+          "load_categories_error": "No se pudieron cargar las categorías.",
+          "load_posts_error": "No se pudieron cargar las crónicas.",
+          "posts_updated": "Se han actualizado algunas crónicas.",
+          "post_edited": "Una crónica ha sido editada.",
+          "post_deleted": "Una crónica ha sido eliminada.",
+          "login_required": "Debes iniciar sesión.",
+          "delete_error": "Error al borrar la publicación.",
+          "delete_success": "La crónica ha sido borrada."
+        }
+      },
+      "create_post": {
+        "edit_title": "Editar Crónica",
+        "create_title": "Forjar Nueva Crónica",
+        "title_label": "Título de la Crónica:",
+        "title_placeholder": "Un título épico para tu aventura...",
+        "content_label": "Contenido de la Crónica:",
+        "content_placeholder": "Detalla tu gesta, tus descubrimientos o tus reflexiones...",
+        "category_label": "Categoría:",
+        "category_select": "Selecciona una categoría...",
+        "image_change": "Cambiar Estandarte",
+        "image_select": "Seleccionar Estandarte",
+        "image_recommendation": "Recomendado: imagen de 800px de ancho.",
+        "image_clear": "Borrar Imagen",
+        "cancel_button": "Cancelar",
+        "submit_button_saving": "Guardando...",
+        "submit_button_publishing": "Publicando...",
+        "submit_button_save_changes": "Guardar Cambios",
+        "submit_button_publish": "Publicar Crónica",
+        "notifications": {
+          "verification_needed": "Debes verificar tu cuenta para poder publicar.",
+          "fill_all_fields": "Por favor, rellena todos los campos obligatorios.",
+          "update_success": "¡Crónica actualizada exitosamente!",
+          "create_success": "¡Crónica publicada exitosamente!",
+          "update_error": "Error al actualizar la crónica.",
+          "create_error": "Error al publicar la crónica."
+        }
+      },
+      "comment": {
+        "unknown_user": "Usuario Desconocido",
+        "user_avatar_alt": "Avatar de {{user}}",
+        "verified_badge": "Verificado",
+        "edited_tag": "(editado)",
+        "edit_tooltip": "Editar comentario",
+        "delete_tooltip": "Eliminar comentario",
+        "save_button": "Guardar",
+        "cancel_button": "Cancelar",
+        "empty_comment_error": "El comentario no puede estar vacío.",
+        "no_text": "No hay texto.",
+        "date_unknown": "Fecha desconocida",
+        "date_invalid": "Fecha inválida"
+      },
+      "blog_post": {
+        "post_meta_by": "Por",
+        "post_meta_on": "el",
+        "verified_account_tooltip": "Cuenta Verificada",
+        "unlike_tooltip": "Quitar 'me gusta'",
+        "like_tooltip": "Me gusta",
+        "comments_count_tooltip": "Número de comentarios",
+        "edit_post_button": "Editar",
+        "edit_post_tooltip": "Editar crónica",
+        "delete_post_button": "Eliminar",
+        "delete_post_tooltip": "Eliminar crónica",
+        "comments_title": "Comentarios",
+        "no_comments": "Sé el primero en comentar esta crónica.",
+        "add_comment_placeholder": "Añade tu verso a esta crónica...",
+        "send_button": "Enviar",
+        "login_to_comment": "Inicia sesión para poder comentar.",
+        "verify_to_comment": "Necesitas verificar tu correo para poder comentar.",
+        "notifications": {
+          "load_comments_error": "Error al cargar comentarios.",
+          "action_auth_error": "Necesitas iniciar sesión y verificar tu cuenta para realizar esta acción.",
+          "empty_comment_error": "El comentario не puede estar vacío.",
+          "add_comment_success": "¡Comentario añadido!",
+          "add_comment_error": "Error al añadir comentario.",
+          "edit_comment_success": "¡Comentario actualizado!",
+          "edit_comment_error": "Error al editar.",
+          "delete_comment_success": "Comentario eliminado.",
+          "delete_comment_error": "Error al eliminar.",
+          "like_auth_error": "Debes iniciar sesión y verificar tu correo para dar 'me gusta'.",
+          "like_action_error": "Error en la acción 'me gusta'."
+        },
+        "delete_comment_modal": {
+          "title": "Eliminar Comentario",
+          "message": "¿Estás seguro? Esta acción es irreversible."
+        },
+        "delete_post_modal": {
+          "title": "Eliminar Crónica",
+          "message": "Se eliminará la crónica y todos sus comentarios. ¿Estás seguro?"
+        }
+      },
+      "confirmation_modal": {
+        "cancel_button": "Cancelar",
+        "confirm_button": "Confirmar"
+      },
+      "dropdown": {
+        "profile_menu": "Menú Perfil",
+        "back_to_main": "Principal"
+      },
+        "game_setup": {
+          "loading_hero": "Cargando datos del héroe...",
+          "main_title": "Prepara tu Destino",
+          "welcome_message": "⚔️ Bienvenido, {{user}} ⚔️",
+          "welcome_default": "⚔️ Bienvenido, héroe ⚔️",
+          "new_game_button": "🌟 Nueva Partida",
+          "continue_button": "🔄 Continuar",
+          "step1_title": "Elige tu Gremio de Magia",
+          "step2_title": "Selecciona tu Rango",
+          "step3_title": "¿Qué Hechizo Dominarás?",
+          "change_guild_button": "← Cambiar Gremio",
+          "change_rank_button": "← Cambiar Rango",
+          "start_battle_button": "¡A la Batalla!",
+          "loading_destiny": "Forjando tu Destino...",
+          "loading_battlefield": "El campo de batalla te espera.",
+          "alerts": {
+            "complete_preparation": "¡Oh valiente aventurero! Debes completar tu preparación.",
+            "wait_for_hero": "Aguardando la llegada del héroe... Por favor, espera un momento o vuelve a iniciar sesión.",
+            "course_check_error": "Error verificando curso:",
+            "start_game_error_generic": "Error al iniciar el juego: {{error}}",
+            "connection_error": "Ocurrió un error al conectar con el servidor. Inténtalo de nuevo."
+          },
+          "languages": {
+            "python": "Python",
+            "javascript": "JavaScript",
+            "php": "PHP"
+          },
+          "language_descriptions": {
+            "python": "El lenguaje de la serpiente sabia",
+            "javascript": "El hechizo del navegador",
+            "php": "La magia del servidor"
+          },
+          "difficulties": {
+            "facil": "Aprendiz",
+            "medio": "Guerrero",
+            "dificil": "Maestro"
+          },
+          "difficulty_descriptions": {
+            "facil": "Para nuevos aventureros",
+            "medio": "Para valientes experimentados",
+            "dificil": "Solo para los más audaces"
+          },
+          "subtopics": {
+            "python_facil": ["Variables y Tipos de Datos", "Operadores Básicos", "Listas", "Condicionales Simples", "Input/Output"],
+            "python_medio": ["Funciones y Alcance", "Bucles For y While", "Diccionarios", "Manejo de Archivos", "Módulos"],
+            "python_dificil": ["Programación Orientada a Objetos", "Manejo de Errores", "Comprensión de Listas", "Decoradores", "Generadores"],
+            "javascript_facil": ["Declaración de Variables (var, let, const)", "Tipos de Datos Primitivos", "Arrays", "Funciones Básicas", "Condicionales"],
+            "javascript_medio": ["Objetos y Propiedades", "DOM Básico", "Funciones Flecha", "Event Listeners", "JSON"],
+            "javascript_dificil": ["Asincronía (Promises, async/await)", "Closures", "Prototipos", "ES6+ Features", "Módulos"],
+            "php_facil": ["Sintaxis Básica y Variables", "Estructuras de Control (if, else)", "Arrays Simples", "Funciones Básicas", "Formularios"],
+            "php_medio": ["Funciones", "Formularios (GET y POST)", "Sesiones Básicas", "Cookies", "Include/Require"],
+            "php_dificil": ["Clases y Objetos (POO)", "Conexión a Base de Datos (PDO)", "APIs REST", "Namespaces", "Composer"]
+          }
+        },
+        "leaderboard": {
+            "beginner_title": "Principiante",
+            "intermediate_title": "Intermedio",
+            "advanced_title": "Avanzado",
+            "player_header": "Jugador",
+            "time_header": "Tiempo(s)"
+          },
+          "loading_screen": {
+            "title": "Preparando el Reino",
+            "message": "Los dragones están calentando sus llamas y los caballeros afilan sus espadas..."
+          },
+          "login": {
+            "document_title": "Login | Gods Of Eternia",
+            "login_title": "Iniciar Sesión",
+            "email_placeholder": "Correo",
+            "password_placeholder": "Contraseña",
+            "submit_button": "Iniciar Sesión",
+            "submit_button_loading": "Ingresando...",
+            "forgot_password_link": "¿Olvidaste tu contraseña?",
+            "modal_title": "Recuperar Contraseña",
+            "modal_step1_intro": "Ingresa tu correo y te enviaremos un código para restablecer tu contraseña.",
+            "modal_step2_intro": "Ingresa el código que recibiste y tu nueva contraseña.",
+            "modal_email_placeholder": "Correo electrónico",
+            "modal_code_placeholder": "Código de verificación",
+            "modal_new_password_placeholder": "Nueva contraseña",
+            "modal_confirm_password_placeholder": "Confirmar nueva contraseña",
+            "modal_send_code_button": "Enviar Código",
+            "modal_sending_code_button": "Enviando...",
+            "modal_reset_button": "Restablecer Contraseña",
+            "modal_resetting_button": "Actualizando...",
+            "errors": {
+              "invalid_email": "Por favor, ingresa un correo electrónico válido.",
+              "api_not_configured": "Error de configuración: La URL de la API no está definida.",
+              "login_failed": "Error al iniciar sesión",
+              "connection_error": "No se pudo conectar con el servidor. Verifica que esté activo.",
+              "api_call_error": "No se pudo conectar con el servidor.",
+              "password_mismatch": "Las contraseñas no coinciden.",
+              "invalid_code": "El código de verificación debe tener 6 dígitos.",
+              "password_requirements": "La contraseña debe tener mínimo 8 caracteres, una mayúscula, una minúscula, un número y un símbolo."
+            },
+            "success": {
+              "code_sent": "Se ha enviado un código a tu correo.",
+              "password_updated": "¡Contraseña actualizada con éxito!"
+            }
+          },
+        "camera_modal": {
+            "title_captured": "Retrato Medieval",
+            "title_capturing": "Cámara del Cronista",
+            "subtitle_captured": "Tu retrato ha sido bendecido con la esencia medieval",
+            "subtitle_loading": "Preparando la cámara mágica...",
+            "subtitle_ready": "Prepárate para tu retrato épico",
+            "retry_button": "🔄 Reintentar",
+            "retrying_button": "Intentando...",
+            "camera_loading": "Iniciando cámara...",
+            "loading": "Cargando...",
+            "alt_text_preview": "Retrato Medieval",
+            "confirm_button": "⚔️ Usar este Retrato",
+            "retake_button": "🔄 Nuevo Retrato",
+            "capture_button": "📸 Crear Retrato Medieval",
+            "capture_loading_button": "⏳ Cargando...",
+            "cancel_button": "❌ Cancelar",
+            "errors": {
+            "unsupported_browser": "Tu navegador no soporta la API de cámara o estás en un entorno no seguro (requiere HTTPS).",
+            "timeout": "La cámara tardó demasiado en responder. Intenta recargar la página o reiniciar tu navegador.",
+            "permission_denied": "Permiso de cámara denegado. Por favor, permite el acceso a la cámara en tu navegador.",
+            "not_found": "No se encontró ninguna cámara. Asegúrate de que tienes una conectada y funcionando.",
+            "in_use": "La cámara está siendo usada por otra aplicación. Cierra otras que puedan estar usando la cámara.",
+            "not_compatible": "La configuración de cámara solicitada no es compatible. Intenta con otra cámara.",
+            "security_error": "Error de seguridad. Asegúrate de estar en una conexión segura (HTTPS).",
+            "unknown": "Error desconocido al acceder a la cámara.",
+            "generic": "Error: {{message}}",
+            "not_ready": "La cámara no está lista para capturar. Espera un momento e intenta de nuevo.",
+            "capture_failed": "Error al capturar la imagen. Intenta de nuevo."
+            }
+        },
+        "player_profile": {
+            "document_title": "Jugador | Gods of Eternia",
+            "loading_profile": "Cargando Perfil...",
+            "title": "Perfil del Héroe",
+            "default_description": "Un valiente héroe cuya historia está por escribirse...",
+            "anonymous_hero": "Héroe Anónimo",
+            "edit_profile_tooltip": "Editar perfil",
+            "change_image_tooltip": "Cambiar imagen",
+            "alt_player_profile": "Perfil del jugador",
+            "stats": {
+              "level": "Nivel",
+              "victories": "Victorias",
+              "badges": "Insignias"
+            },
+            "edit_form": {
+              "username_label": "Nombre de héroe:",
+              "description_label": "Descripción:",
+              "description_placeholder": "Describe tu historia como héroe...",
+              "save_button": "💾 Guardar",
+              "saving_button": "Guardando...",
+              "cancel_button": "❌ Cancelar"
+            },
+            "image_modal": {
+              "title": "🏰 Cambiar Retrato Medieval",
+              "subtitle": "Elige cómo crear tu retrato épico",
+              "capture_button": "📸 Capturar Retrato",
+              "transform_button": "🖼️ Transformar Imagen",
+              "cancel_button": "❌ Cancelar"
+            },
+            "notifications": {
+              "worker_error": "Error al procesar la imagen.",
+              "uploading_image": "Subiendo imagen...",
+              "image_updated_success": "¡Imagen actualizada con estilo medieval!",
+              "upload_image_error": "Error al subir la imagen.",
+              "connection_error": "Error de conexión.",
+              "image_too_large": "La imagen no puede ser mayor a 5MB.",
+              "invalid_file_type": "Por favor selecciona un archivo de imagen válido.",
+              "applying_filter": "Aplicando filtro medieval...",
+              "profile_updated_success": "Perfil actualizado correctamente.",
+              "profile_update_error": "Error al actualizar el perfil.",
+              "load_profile_error": "Error al cargar el perfil.",
+              "server_connection_error": "No se pudo conectar con el servidor."
+            }
+          },
+          "register": {
+            "document_title": "Registro | Gods Of Eternia",
+            "form_title": "Registro - Gods of Eternia",
+            "username_placeholder": "Usuario",
+            "email_placeholder": "Correo",
+            "password_placeholder": "Contraseña",
+            "submit_button": "Registrarse",
+            "submit_button_loading": "Registrando...",
+            "already_registered_text": "¿Ya te registraste?",
+            "verify_account_button": "Verifica tu cuenta",
+            "password_strong": "✅ Contraseña segura",
+            "validation": {
+              "min_length": "La contraseña debe tener al menos 8 caracteres",
+              "uppercase": "La contraseña debe contener al menos una letra mayúscula",
+              "lowercase": "La contraseña debe contener al menos una letra minúscula",
+              "number": "La contraseña debe contener al menos un número",
+              "special_char": "La contraseña debe contener al menos un carácter especial",
+              "common_password": "Esta contraseña es muy común y fácil de adivinar"
+            },
+            "errors": {
+              "generic": "Error en el registro",
+              "connection_error": "No se pudo conectar con el servidor. Verifica que esté activo."
+            }
+          },
+          "reset_password": {
+            "title": "Restablecer Contraseña",
+            "code_placeholder": "Código de verificación",
+            "new_password_placeholder": "Nueva contraseña",
+            "confirm_password_placeholder": "Confirmar nueva contraseña",
+            "submit_button": "Restablecer Contraseña",
+            "submit_button_loading": "Actualizando...",
+            "success_message": "¡Contraseña actualizada con éxito!",
+            "errors": {
+              "password_requirements": "La contraseña debe tener mínimo 8 caracteres, una mayúscula, una minúscula, un número y un símbolo.",
+              "password_mismatch": "Las contraseñas no coinciden.",
+              "invalid_code": "El código de verificación debe tener 6 dígitos.",
+              "generic": "Ocurrió un error al restablecer la contraseña."
+            }
+          },
+          "verification": {
+            "document_title": "Verificación | Gods Of Eternia",
+            "loading": "Cargando...",
+            "title": "Verificación - Gods of Eternia",
+            "instruction": "Ingresa tu correo y el código que te enviamos.",
+            "email_placeholder": "Correo electrónico",
+            "code_placeholder": "Código de verificación",
+            "submit_button": "Verificar",
+            "submit_button_loading": "Verificando...",
+            "errors": {
+              "generic": "Error de verificación",
+              "connection_error": "Error al conectar con el servidor. Verifica que esté activo."
+            }
+          },
+          "footer": {
+            "useful_links_title": "Enlaces Útiles",
+            "support_link": "Soporte",
+            "game_guide_link": "Guía del Juego",
+            "legal_title": "Legal",
+            "terms_of_service_link": "Términos de Servicio",
+            "privacy_policy_link": "Política de Privacidad",
+            "copyright": "Todos los derechos reservados.",
+            "support_modal": {
+              "title": "Contactar Soporte",
+              "success_title": "¡Mensaje Enviado!",
+              "success_message": "Gracias por contactarnos, <strong>{{name}}</strong>. Te responderemos pronto.",
+              "name_label": "Nombre",
+              "email_label": "Correo Electrónico",
+              "reason_label": "Motivo de Contacto",
+              "reason_placeholder": "Describe tu consulta o problema...",
+              "cancel_button": "Cancelar",
+              "send_button": "Enviar",
+              "errors": {
+                "all_fields_required": "Todos los campos son obligatorios.",
+                "invalid_email": "Por favor, ingresa un correo electrónico válido.",
+                "send_failed": "Error al enviar la solicitud.",
+                "connection_failed": "Error de conexión. Inténtalo de nuevo más tarde."
+              }
+            }
+          },
+          "common": {
+            "loading": "Cargando..."
+          }
+  }

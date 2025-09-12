@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import { useTranslation } from 'react-i18next'; // Importar hook
 
 const ResetPassword = () => {
+    const { t } = useTranslation(); // Inicializar hook
     const [searchParams] = useSearchParams();
     const navigate = useNavigate();
 
@@ -17,7 +19,6 @@ const ResetPassword = () => {
 
     const API_URL = import.meta.env.VITE_API_URL;
 
-    // Si el código viene en la URL, precargarlo
     useEffect(() => {
         const tokenFromUrl = searchParams.get("token");
         if (tokenFromUrl) {
@@ -30,21 +31,18 @@ const ResetPassword = () => {
         setError("");
         setMessage("");
 
-        // Validación igual a la del backend (auth.py)
         const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
         if (!passwordRegex.test(newPassword)) {
-            setError("La contraseña debe tener mínimo 8 caracteres, una mayúscula, una minúscula, un número y un símbolo.");
+            setError(t('reset_password.errors.password_requirements'));
             return;
         }
-
         if (newPassword !== confirmPassword) {
-            setError("Las contraseñas no coinciden.");
+            setError(t('reset_password.errors.password_mismatch'));
             return;
         }
-
         if (!resetCode || resetCode.length !== 6) {
-            setError("El código de verificación debe tener 6 dígitos.");
+            setError(t('reset_password.errors.invalid_code'));
             return;
         }
 
@@ -54,21 +52,17 @@ const ResetPassword = () => {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
-                    token: resetCode, // ✅ importante: coincide con el backend
+                    token: resetCode,
                     new_password: newPassword
                 }),
             });
-
             const data = await response.json();
             if (!response.ok) throw data;
 
-            setMessage(data.message || "¡Contraseña actualizada con éxito!");
-            setTimeout(() => {
-                navigate("/login");
-            }, 2000);
+            setMessage(data.message || t('reset_password.success_message'));
+            setTimeout(() => navigate("/login"), 2000);
         } catch (err) {
-            console.error("Error al restablecer contraseña:", err);
-            setError(err.error || err.message || "Ocurrió un error al restablecer la contraseña.");
+            setError(err.error || err.message || t('reset_password.errors.generic'));
         } finally {
             setLoading(false);
         }
@@ -76,7 +70,7 @@ const ResetPassword = () => {
 
     return (
         <div className="reset-password-container">
-            <h2>Restablecer Contraseña</h2>
+            <h2>{t('reset_password.title')}</h2>
             {message && <p className="success-message">{message}</p>}
             {error && <p className="error-message">{error}</p>}
 
@@ -84,7 +78,7 @@ const ResetPassword = () => {
                 <div className="password-container">
                     <input
                         type="text"
-                        placeholder="Código de verificación"
+                        placeholder={t('reset_password.code_placeholder')}
                         value={resetCode}
                         onChange={(e) => setResetCode(e.target.value)}
                         className="password-input"
@@ -92,11 +86,10 @@ const ResetPassword = () => {
                         disabled={loading}
                     />
                 </div>
-
                 <div className="password-container">
                     <input
                         type={showNewPassword ? "text" : "password"}
-                        placeholder="Nueva contraseña"
+                        placeholder={t('reset_password.new_password_placeholder')}
                         value={newPassword}
                         onChange={(e) => setNewPassword(e.target.value)}
                         className="password-input"
@@ -107,11 +100,10 @@ const ResetPassword = () => {
                         {showNewPassword ? <FaEyeSlash /> : <FaEye />}
                     </span>
                 </div>
-
                 <div className="password-container">
                     <input
                         type={showConfirmPassword ? "text" : "password"}
-                        placeholder="Confirmar nueva contraseña"
+                        placeholder={t('reset_password.confirm_password_placeholder')}
                         value={confirmPassword}
                         onChange={(e) => setConfirmPassword(e.target.value)}
                         className="password-input"
@@ -122,9 +114,8 @@ const ResetPassword = () => {
                         {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
                     </span>
                 </div>
-
                 <button type="submit" disabled={loading}>
-                    {loading ? "Actualizando..." : "Restablecer Contraseña"}
+                    {loading ? t('reset_password.submit_button_loading') : t('reset_password.submit_button')}
                 </button>
             </form>
         </div>

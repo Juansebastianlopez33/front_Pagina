@@ -1,8 +1,9 @@
 import React from "react";
-import PropTypes from "prop-types"; 
+import PropTypes from "prop-types";
+import { useTranslation } from 'react-i18next'; // Importar hook
 import "./Leaderboard.css";
 
-// --- Los datos y el componente Leaderboard se mantienen igual ---
+// Los datos de ejemplo se mantienen, ya que en un futuro vendrán de una API.
 const leaderboardData = {
     principiante: [
         { id: 'b1', name: "NoviceHero", time: 180 },
@@ -28,6 +29,8 @@ const leaderboardData = {
 };
 
 const Leaderboard = ({ title, players }) => {
+    const { t } = useTranslation(); // Inicializar hook
+
     const getRankIcon = (index) => {
         if (index === 0) return '🏆';
         if (index === 1) return '🥈';
@@ -42,8 +45,8 @@ const Leaderboard = ({ title, players }) => {
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Jugador</th>
-                        <th>Tiempo(s)</th>
+                        <th>{t('leaderboard.player_header')}</th>
+                        <th>{t('leaderboard.time_header')}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -70,14 +73,15 @@ Leaderboard.propTypes = {
 };
 
 
-// --- Componente Principal Simplificado ---
 const Leaderboards = () => {
+    const { t } = useTranslation(); // Inicializar hook
+
     return (
         <div className="leaderboards-wrapper">
             <div className="leaderboards-container">
-                <Leaderboard title="Principiante" players={leaderboardData.principiante} />
-                <Leaderboard title="Intermedio" players={leaderboardData.intermedio} />
-                <Leaderboard title="Avanzado" players={leaderboardData.avanzado} />
+                <Leaderboard title={t('leaderboard.beginner_title')} players={leaderboardData.principiante} />
+                <Leaderboard title={t('leaderboard.intermediate_title')} players={leaderboardData.intermedio} />
+                <Leaderboard title={t('leaderboard.advanced_title')} players={leaderboardData.avanzado} />
             </div>
         </div>
     );

@@ -1,10 +1,13 @@
-// src/components/Loader.jsx
+import { useTranslation } from 'react-i18next'; // Importar hook
+
 const Loader = () => {
+    const { t } = useTranslation(); // Inicializar hook
+
     return (
         <div className="loader">
-            Cargando...
+            {t('common.loading')}
         </div>
     );
 };
 
-export default Loader; // Asegúrate de que se exporte correctamente
+export default Loader;

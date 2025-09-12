@@ -1,29 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext"; 
+import { useTranslation } from 'react-i18next'; // Importar hook
 
 // Componentes
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Leaderboard from "../pages/Leaderboard/Leaderboard";
 import TypingEffect from '../components/TypingEffect';
-import GameSetupModal from "../components/GameSetupModal/GameSetupModal"; // ✅ nuevo modal del juego
+import GameSetupModal from "../components/GameSetupModal/GameSetupModal";
 
 function Home() {
+    const { t } = useTranslation(); // Inicializar hook
     const { isAuthenticated } = useAuth(); 
     const navigate = useNavigate();
     
     const [isTypingDone, setIsTypingDone] = useState(false);
-    const fullTitle = "Biienvenidos a Gods of Eternia";
-
-    // ✅ nuevo estado para el modal
     const [isGameModalOpen, setIsGameModalOpen] = useState(false);
 
-    useEffect(() => {
-        document.title = 'Inicio | Gods Of Eternia';
-    }, []);
+    // Usamos la clave de traducción para el título animado
+    const fullTitle = t('home.welcome_title');
 
-    // ✅ ahora el botón abre el modal en lugar de navegar directo
+    useEffect(() => {
+        document.title = t('home.document_title');
+    }, [t]);
+
     const handlePlayClick = () => {
         if (isAuthenticated) {
             setIsGameModalOpen(true);
@@ -41,9 +42,8 @@ function Home() {
                         <div className="typing-container">
                             <h2>
                                 {isTypingDone ? (
-                                    <>
-                                        Bienvenidos a <span>Gods of Eternia</span>
-                                    </>
+                                    // Usamos dangerouslySetInnerHTML para renderizar el <span> de "Gods of Eternia" si es necesario
+                                    <span dangerouslySetInnerHTML={{ __html: t('home.welcome_title').replace('Gods of Eternia', '<span>Gods of Eternia</span>') }} />
                                 ) : (
                                     <>
                                         <TypingEffect
@@ -58,14 +58,14 @@ function Home() {
                         </div>
                         
                         <p className="subtitle">
-                            Sumérgete en un mundo épico de fantasía medieval donde los dioses caminan entre los mortales.
+                            {t('home.welcome_subtitle')}
                         </p>
                         <div className="btn-container">
                             <button 
                                 className="play-button" 
                                 onClick={handlePlayClick}
                             >
-                                Jugar Ahora
+                                {t('home.play_button')}
                             </button>
                             <Leaderboard />
                         </div>
@@ -74,19 +74,18 @@ function Home() {
 
                 <section className="feature-section">
                     <div className="feature-content">
-                        <h2>Desde el Escritorio del Cronista</h2>
+                        <h2>{t('home.feature_title')}</h2>
                         <p>
-                            Explora las leyendas, hazañas y misterios de Eternia contados por sus propios héroes.
+                           {t('home.feature_subtitle')}
                         </p>
                         <Link to="/blog">
-                            <button className="feature-button">Ir al Blog</button>
+                            <button className="feature-button">{t('home.blog_button')}</button>
                         </Link>
                     </div>
                 </section>
             </main>
             <Footer />
 
-            {/* ✅ Modal del juego */}
             <GameSetupModal
                 isOpen={isGameModalOpen}
                 onClose={() => setIsGameModalOpen(false)}

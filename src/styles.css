@@ -946,6 +946,138 @@ html, body {
   line-height: 1.5;
   color: #3B2F2F;
 }
+/* Contenedor para los botones de idioma */
+.language-selector {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0;
+  background: none;
+  border: none;
+}
+
+/* Estilo base para cada botón de idioma */
+.lang-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.25rem;
+  border-radius: 8px;
+  transition: all 0.2s ease-in-out;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 24px;
+  opacity: 0.6;
+  transform: scale(0.9);
+}
+
+/* Estilo para las imágenes de banderas */
+.flag-icon {
+  width: 20px;
+  height: 15px;
+  object-fit: cover;
+  border-radius: 2px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* Fallback text styling */
+.flag-fallback {
+  font-size: 10px;
+  font-weight: bold;
+  color: #ffffff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* Efecto hover */
+.lang-button:hover {
+  opacity: 0.8;
+  transform: scale(1);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Estado activo */
+.lang-button.active {
+  opacity: 1;
+  transform: scale(1.1);
+  box-shadow: 0 0 8px rgba(246, 224, 94, 0.6);
+  border-radius: 6px;
+}
+
+/* Separador entre botones */
+.lang-separator {
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 12px;
+  font-weight: normal;
+  margin: 0;
+}
+
+/* Responsividad para móviles */
+@media (max-width: 768px) {
+  .language-selector {
+    gap: 0.3rem;
+  }
+  
+  .lang-button {
+    width: 28px;
+    height: 20px;
+    font-size: 16px;
+  }
+  
+  .lang-separator {
+    font-size: 10px;
+  }
+}
+
+/* Animación suave al cambiar idioma */
+.lang-button.active {
+  animation: flagSelect 0.3s ease-in-out;
+}
+
+@keyframes flagSelect {
+  0% {
+    transform: scale(1.1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1.1);
+  }
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem; /* Espacio entre los links y las banderas */
+}
+
+.language-selector.desktop {
+  display: none;
+}
+
+/* En el menú móvil, centramos las banderas */
+.mobile-lang-list-item {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.5rem; /* Espacio arriba de las banderas */
+  padding-top: 1rem;
+  border-top: 1px solid #4a5568; /* Línea divisoria */
+}
+
+@media (min-width: 768px) {
+  /* Mostramos el selector de escritorio */
+  .language-selector.desktop {
+    display: flex; 
+  }
+
+  /* Y ocultamos la versión móvil que está dentro de la lista */
+  .mobile-lang-list-item {
+    display: none;
+  }
+}
 
 /* Animación opcional para que aparezca suavemente */
 @keyframes fadeIn {

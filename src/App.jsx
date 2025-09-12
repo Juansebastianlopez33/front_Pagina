@@ -37,7 +37,6 @@ const App = () => {
         {/* --- Rutas Protegidas --- */}
         <Route element={<ProtectedRoute />}>
           <Route path="/player" element={<Player />} />        
-          {/* ¡CAMBIO AQUÍ! La ruta /juego ahora carga el MODAL de configuración */}
           <Route path="/juego" element={<GameSetupModal />} />
         </Route>
       </Routes>

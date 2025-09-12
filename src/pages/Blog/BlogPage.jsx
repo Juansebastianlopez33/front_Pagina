@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTranslation } from 'react-i18next'; // Importar el hook
 import BlogPost from '../../components/BlogPost';
 import CreatePost from '../../components/CreatePost';
 import { useAuth } from '../../context/AuthContext';
@@ -7,20 +8,16 @@ import './Blog.css';
 import { io } from 'socket.io-client';
 
 const BlogPage = () => {
+    const { t } = useTranslation(); // Inicializar el hook
     const [posts, setPosts] = useState([]);
     const [loading, setLoading] = useState(true);
     const { user, token } = useAuth();
     const [notification, setNotification] = useState({ message: '', type: '' });
     const [isCreating, setIsCreating] = useState(false);
     const [selectedPostId, setSelectedPostId] = useState(null);
-
-    // edición
     const [postToEdit, setPostToEdit] = useState(null);
-
-    // categorías
     const [categories, setCategories] = useState([]);
     const [selectedFilterCategory, setSelectedFilterCategory] = useState(null);
-
     const API_URL = import.meta.env.VITE_API_URL;
 
     const buildApiUrl = useCallback((path) => {
@@ -30,8 +27,9 @@ const BlogPage = () => {
     }, [API_URL]);
 
     useEffect(() => {
-        document.title = 'Crónicas de Eternia | Blog';
-    }, []);
+        // Título del documento traducido
+        document.title = t('blog.document_title');
+    }, [t]);
 
     useEffect(() => {
         if (!notification.message) return;
@@ -49,13 +47,13 @@ const BlogPage = () => {
         try {
             const url = buildApiUrl('/blog/categorias');
             const response = await fetch(url);
-            if (!response.ok) throw new Error("No se pudieron cargar las categorías.");
+            if (!response.ok) throw new Error(t('blog.notifications.load_categories_error'));
             const data = await response.json();
             setCategories(data);
         } catch (error) {
             showNotification(error.message, 'error');
         }
-    }, [buildApiUrl, showNotification]);
+    }, [buildApiUrl, showNotification, t]);
 
     const fetchPosts = useCallback(async (categoryId = null) => {
         setLoading(true);
@@ -63,7 +61,7 @@ const BlogPage = () => {
             let url = buildApiUrl('/blog/publicaciones');
             if (categoryId) url = `${url}?categoria_id=${categoryId}`;
             const response = await fetch(url);
-            if (!response.ok) throw new Error("No se pudieron cargar las crónicas.");
+            if (!response.ok) throw new Error(t('blog.notifications.load_posts_error'));
             const data = await response.json();
             setPosts(data);
         } catch (error) {
@@ -71,23 +69,16 @@ const BlogPage = () => {
         } finally {
             setLoading(false);
         }
-    }, [buildApiUrl, showNotification]);
+    }, [buildApiUrl, showNotification, t]);
 
     useEffect(() => {
         fetchPosts();
         fetchCategories();
-
         const socket = io(API_URL);
 
-        socket.on('connect', () => {
-            console.log('Conectado a Socket.IO');
-        });
+        socket.on('connect', () => console.log('Conectado a Socket.IO'));
+        socket.on('disconnect', () => console.log('Desconectado de Socket.IO'));
 
-        socket.on('disconnect', () => {
-            console.log('Desconectado de Socket.IO');
-        });
-
-        // 🔥 batch updates
         socket.on('batched_publication_updates', (updatedPostsList) => {
             setPosts(prevPosts => {
                 const updatedPostsMap = new Map(prevPosts.map(post => [post.id, post]));
@@ -96,31 +87,28 @@ const BlogPage = () => {
                 });
                 return Array.from(updatedPostsMap.values()).sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
             });
-            showNotification('Se han actualizado algunas crónicas.', 'info');
+            showNotification(t('blog.notifications.posts_updated'), 'info');
         });
 
-        // 🔥 instant update
         socket.on('publication_updated_instant', (updatedPost) => {
             setPosts(prevPosts => {
-                const updatedPostsMap = new Map(prevPosts.map(post => [post.id, post]));
-                updatedPostsMap.set(updatedPost.id, updatedPost);
-                return Array.from(updatedPostsMap.values()).sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+                 const updatedPostsMap = new Map(prevPosts.map(post => [post.id, post]));
+                 updatedPostsMap.set(updatedPost.id, updatedPost);
+                 return Array.from(updatedPostsMap.values()).sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
             });
-            showNotification('Una crónica ha sido editada.', 'info');
+            showNotification(t('blog.notifications.post_edited'), 'info');
         });
 
         socket.on('publication_deleted', (data) => {
             setPosts(prevPosts => prevPosts.filter(post => post.id !== data.id));
-            showNotification('Una crónica ha sido eliminada.', 'info');
+            showNotification(t('blog.notifications.post_deleted'), 'info');
             if (selectedPostId === data.id) {
                 setSelectedPostId(null);
             }
         });
 
-        return () => {
-            socket.disconnect();
-        };
-    }, [fetchPosts, fetchCategories, API_URL, showNotification, selectedPostId]);
+        return () => socket.disconnect();
+    }, [fetchPosts, fetchCategories, API_URL, showNotification, selectedPostId, t]);
 
     const handlePostCreated = useCallback(async () => {
         fetchPosts(selectedFilterCategory);
@@ -142,7 +130,7 @@ const BlogPage = () => {
 
     const handleDeletePost = async (postId) => {
         if (!token) {
-            showNotification("Debes iniciar sesión.", "error");
+            showNotification(t('blog.notifications.login_required'), "error");
             return;
         }
         try {
@@ -151,21 +139,15 @@ const BlogPage = () => {
                 method: 'DELETE',
                 headers: { 'Authorization': `Bearer ${token}` },
             });
-
-            if (!response.ok) throw new Error("Error al borrar publicación");
-            showNotification('La crónica ha sido borrada.', 'success');
+            if (!response.ok) throw new Error(t('blog.notifications.delete_error'));
+            showNotification(t('blog.notifications.delete_success'), 'success');
         } catch (error) {
             showNotification(error.message, 'error');
         }
     };
 
-    const handleViewMore = (postId) => {
-        setSelectedPostId(postId);
-    };
-
-    const handleBackToList = () => {
-        setSelectedPostId(null);
-    };
+    const handleViewMore = (postId) => setSelectedPostId(postId);
+    const handleBackToList = () => setSelectedPostId(null);
 
     const handleCategoryFilterChange = (categoryId) => {
         setSelectedFilterCategory(categoryId);
@@ -179,7 +161,7 @@ const BlogPage = () => {
     };
 
     if (loading) {
-        return <div className="loading-screen">Cargando crónicas de Eternia...</div>;
+        return <div className="loading-screen">{t('blog.loading')}</div>;
     }
 
     const selectedPost = selectedPostId ? posts.find(post => post.id === selectedPostId) : null;
@@ -192,15 +174,15 @@ const BlogPage = () => {
 
             <div className="blog-container">
                 <div className="blog-header">
-                    <h1>Crónicas de Eternia</h1>
+                    <h1>{t('blog.title')}</h1>
                     {user && !isCreating && !selectedPostId && (
                         <button className="create-new-post-button" onClick={() => setIsCreating(true)}>
-                            + Forjar Nueva Crónica
+                            {t('blog.create_button')}
                         </button>
                     )}
                     {selectedPostId && (
                         <button className="back-to-list-button" onClick={handleBackToList}>
-                            ← Volver a Crónicas
+                            {t('blog.back_button')}
                         </button>
                     )}
                 </div>
@@ -211,7 +193,7 @@ const BlogPage = () => {
                             className={`category-button ${selectedFilterCategory === null ? 'active' : ''}`}
                             onClick={() => handleCategoryFilterChange(null)}
                         >
-                            Todas las Crónicas
+                            {t('blog.all_posts')}
                         </button>
                         {categories.map(category => (
                             <button
@@ -226,16 +208,16 @@ const BlogPage = () => {
                 )}
 
                 {selectedPost ? (
-                    <BlogPost
-                        key={selectedPost.id}
-                        post={selectedPost}
-                        currentUser={user}
-                        token={token}
-                        onDeletePost={handleDeletePost}
-                        onEditClick={handleEditClick}
-                        showNotification={showNotification}
-                        onBackToList={handleBackToList}
-                    />
+                     <BlogPost
+                         key={selectedPost.id}
+                         post={selectedPost}
+                         currentUser={user}
+                         token={token}
+                         onDeletePost={handleDeletePost}
+                         onEditClick={handleEditClick}
+                         showNotification={showNotification}
+                         onBackToList={handleBackToList}
+                     />
                 ) : (
                     <>
                         {posts.length > 0 ? (
@@ -268,7 +250,7 @@ const BlogPage = () => {
                                                 className="view-more-button"
                                                 onClick={() => handleViewMore(post.id)}
                                             >
-                                                ⚔️ Leer Crónica
+                                                {t('blog.read_button')}
                                             </button>
                                         </div>
                                     </article>
@@ -276,7 +258,7 @@ const BlogPage = () => {
                             </div>
                         ) : (
                             <div className="empty-state">
-                                <p>🏰 Aún no se han escrito crónicas. ¡Sé el primero en forjar una leyenda! ⚔️</p>
+                                <p>{t('blog.empty_state')}</p>
                             </div>
                         )}
                         <AnimatePresence>
@@ -310,10 +292,9 @@ const BlogPage = () => {
                     </>
                 )}
 
-                {/* Modal de edición */}
                 <AnimatePresence>
                     {postToEdit && (
-                        <motion.div
+                         <motion.div
                             className="create-post-modal-overlay"
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}

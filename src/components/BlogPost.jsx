@@ -1,12 +1,13 @@
-/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from "framer-motion";
+import { useTranslation } from 'react-i18next'; // Importar hook
 import Comment from './Comment';
-import ConfirmationModal from '../pages/Blog/Confirmation/ConfirmationModal'; // Asegúrate que la ruta sea correcta
+import ConfirmationModal from '../pages/Blog/Confirmation/ConfirmationModal';
 import { io } from 'socket.io-client';
 import '../pages/Blog/Blog.css';
 
 const BlogPost = ({ post, currentUser, token, onDeletePost, onEditClick, showNotification }) => {
+    const { t, i18n } = useTranslation(); // Inicializar hook
     const [comments, setComments] = useState([]);
     const [newComment, setNewComment] = useState('');
     const [socket, setSocket] = useState(null);
@@ -24,14 +25,13 @@ const BlogPost = ({ post, currentUser, token, onDeletePost, onEditClick, showNot
     const isPostOwner = currentUser && currentUser.id === post.autor_id;
     const isUserVerified = currentUser?.verificado === true;
 
+    // ... (El useEffect del socket se mantiene igual)
     useEffect(() => {
         const newSocket = io(API_URL);
         setSocket(newSocket);
-
         newSocket.on('connect', () => {
             newSocket.emit('join_room', { room: `publicacion_${post.id}` });
         });
-
         const handleCommentEvent = (data, type) => {
             if (data.publicacion_id === post.id) {
                 setComments(prevComments => {
@@ -51,11 +51,9 @@ const BlogPost = ({ post, currentUser, token, onDeletePost, onEditClick, showNot
                 });
             }
         };
-
         newSocket.on('comment_added', data => handleCommentEvent(data, 'added'));
         newSocket.on('comment_updated', data => handleCommentEvent(data, 'updated'));
         newSocket.on('comment_deleted', data => handleCommentEvent(data, 'deleted'));
-
         newSocket.on('like_update', data => {
             if (data.publicacion_id === post.id) {
                 setLikeCount(data.likes);
@@ -65,12 +63,12 @@ const BlogPost = ({ post, currentUser, token, onDeletePost, onEditClick, showNot
                 setIsLiking(false);
             }
         });
-
         return () => {
             newSocket.emit('leave_room', { room: `publicacion_${post.id}` });
             newSocket.disconnect();
         };
     }, [API_URL, post.id, currentUser?.id]);
+
 
     useEffect(() => {
         const fetchComments = async () => {
@@ -78,19 +76,19 @@ const BlogPost = ({ post, currentUser, token, onDeletePost, onEditClick, showNot
                 const response = await fetch(`${API_URL}/blog/publicaciones/${post.id}/comentarios`, {
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
-                if (!response.ok) throw new Error('Error al cargar comentarios.');
+                if (!response.ok) throw new Error(t('blog_post.notifications.load_comments_error'));
                 const data = await response.json();
                 setComments(data);
             } catch (error) {
-                console.error("Error al cargar comentarios:", error);
+                console.error("Error fetching comments:", error);
             }
         };
         fetchComments();
-    }, [post.id, API_URL, token]);
+    }, [post.id, API_URL, token, t]);
 
     const apiRequest = async (endpoint, method, body, successMessage, errorMessage) => {
         if (!currentUser || !isUserVerified) {
-            showNotification("Necesitas iniciar sesión y verificar tu cuenta para realizar esta acción.", "error");
+            showNotification(t('blog_post.notifications.action_auth_error'), "error");
             return;
         }
         try {
@@ -116,28 +114,32 @@ const BlogPost = ({ post, currentUser, token, onDeletePost, onEditClick, showNot
     const handleAddComment = (e) => {
         e.preventDefault();
         if (!newComment.trim()) {
-            showNotification("El comentario no puede estar vacío.", "error");
+            showNotification(t('blog_post.notifications.empty_comment_error'), "error");
             return;
         }
         apiRequest(
             '/blog/comentar-publicacion', 'POST',
             { publicacion_id: post.id, comentario: newComment },
-            "Comentario añadido!",
-            "Error al añadir comentario."
+            t('blog_post.notifications.add_comment_success'),
+            t('blog_post.notifications.add_comment_error')
         ).then(() => setNewComment('')).catch(() => {});
     };
 
     const handleEditComment = (commentId, updatedText) => {
-        apiRequest(`/blog/editar-comentario/${commentId}`, 'PUT', { texto: updatedText }, "Comentario actualizado!", "Error al editar.");
+        apiRequest(`/blog/editar-comentario/${commentId}`, 'PUT', { texto: updatedText }, 
+            t('blog_post.notifications.edit_comment_success'), 
+            t('blog_post.notifications.edit_comment_error'));
     };
 
     const handleDeleteComment = (commentId) => {
         setModalState({
             isOpen: true,
-            title: "Eliminar Comentario",
-            message: "¿Estás seguro? Esta acción es irreversible.",
+            title: t('blog_post.delete_comment_modal.title'),
+            message: t('blog_post.delete_comment_modal.message'),
             onConfirm: () => {
-                apiRequest(`/blog/eliminar-comentario/${commentId}`, 'DELETE', null, "Comentario eliminado.", "Error al eliminar.");
+                apiRequest(`/blog/eliminar-comentario/${commentId}`, 'DELETE', null, 
+                    t('blog_post.notifications.delete_comment_success'), 
+                    t('blog_post.notifications.delete_comment_error'));
             }
         });
     };
@@ -145,49 +147,42 @@ const BlogPost = ({ post, currentUser, token, onDeletePost, onEditClick, showNot
     const handleDeletePost = () => {
         setModalState({
             isOpen: true,
-            title: "Eliminar Crónica",
-            message: "Se eliminará la crónica y todos sus comentarios. ¿Estás seguro?",
-            onConfirm: () => {
-                onDeletePost(post.id);
-            }
+            title: t('blog_post.delete_post_modal.title'),
+            message: t('blog_post.delete_post_modal.message'),
+            onConfirm: () => onDeletePost(post.id)
         });
     };
 
     const handleLike = () => {
         if (isLiking) return;
         if (!currentUser || !isUserVerified) {
-            showNotification("Debes iniciar sesión y verificar tu correo para dar 'me gusta'.", "error");
+            showNotification(t('blog_post.notifications.like_auth_error'), "error");
             return;
         }
         setIsLiking(true);
         const method = userHasLiked ? 'DELETE' : 'POST';
         const endpoint = `/blog/publicaciones/${post.id}/${userHasLiked ? 'unlike' : 'like'}`;
-        apiRequest(endpoint, method, {}, null, "Error en la acción 'me gusta'.")
+        apiRequest(endpoint, method, {}, null, t('blog_post.notifications.like_action_error'))
             .catch(() => setIsLiking(false));
     };
 
-    // --- CAMBIOS CLAVE ---
-    // 1. Creamos manejadores dedicados para el modal
     const handleConfirmModal = () => {
         if (typeof modalState.onConfirm === 'function') {
-            modalState.onConfirm(); // Ejecuta la acción guardada en el estado
+            modalState.onConfirm();
         }
-        // Resetea completamente el estado del modal para limpiarlo
         setModalState({ isOpen: false, title: '', message: '', onConfirm: () => {} });
     };
 
     const handleCloseModal = () => {
-        // Al cerrar o cancelar, también reseteamos completamente el estado
         setModalState({ isOpen: false, title: '', message: '', onConfirm: () => {} });
     };
-    // --- FIN DE CAMBIOS CLAVE ---
-
+    
     const defaultImagePlaceholder = "https://placehold.co/800x450/3c2f21/F0F0F0?text=Estandarte";
+
+    const locale = i18n.language === 'es' ? 'es-ES' : 'en-US';
 
     return (
         <>
-            {/* --- CAMBIOS CLAVE --- */}
-            {/* 2. Usamos los nuevos manejadores en el componente del modal */}
             <ConfirmationModal
                 isOpen={modalState.isOpen}
                 onClose={handleCloseModal}
@@ -195,17 +190,15 @@ const BlogPost = ({ post, currentUser, token, onDeletePost, onEditClick, showNot
                 title={modalState.title}
                 message={modalState.message}
             />
-            {/* --- FIN DE CAMBIOS CLAVE --- */}
-
             <article className="blog-post">
                 <header className="post-header">
                     <h1 className="post-title">{post.titulo}</h1>
                     <div className="post-meta">
                         <span className="post-author">
-                            Por {post.autor_username} {post.autor_verificado && <span className="verified-badge" title="Cuenta Verificada">✔</span>}
+                            {t('blog_post.post_meta_by')} {post.autor_username} {post.autor_verificado && <span className="verified-badge" title={t('blog_post.verified_account_tooltip')}>✔</span>}
                         </span>
                         <span className="post-date">
-                            el {new Date(post.created_at).toLocaleDateString()}
+                            {t('blog_post.post_meta_on')} {new Date(post.created_at).toLocaleDateString(locale)}
                         </span>
                         {post.categoria_nombre && (
                             <span className="post-category">{post.categoria_nombre}</span>
@@ -229,30 +222,30 @@ const BlogPost = ({ post, currentUser, token, onDeletePost, onEditClick, showNot
                             onClick={handleLike}
                             className={`like-button ${userHasLiked ? 'liked' : ''}`}
                             disabled={isLiking || !currentUser || !isUserVerified}
-                            title={userHasLiked ? "Quitar 'me gusta'" : "Me gusta"}
+                            title={userHasLiked ? t('blog_post.unlike_tooltip') : t('blog_post.like_tooltip')}
                         >
                             <span className="like-icon">{userHasLiked ? '❤' : '🤍'}</span>
                             <span>{likeCount}</span>
                         </button>
-                        <div className="interaction-count" title="Número de comentarios">
+                        <div className="interaction-count" title={t('blog_post.comments_count_tooltip')}>
                             <span className="icon">💬</span>
                             <span>{comments.length}</span>
                         </div>
                     </div>
                     {isPostOwner && (
                         <div className="owner-actions">
-                            <button onClick={() => onEditClick(post.id)} className="action-button edit" title="Editar crónica">
-                                <span>✏️</span><span>Editar</span>
+                            <button onClick={() => onEditClick(post.id)} className="action-button edit" title={t('blog_post.edit_post_tooltip')}>
+                                <span>✏️</span><span>{t('blog_post.edit_post_button')}</span>
                             </button>
-                            <button onClick={handleDeletePost} className="action-button delete" title="Eliminar crónica">
-                                <span>🗑️</span><span>Eliminar</span>
+                            <button onClick={handleDeletePost} className="action-button delete" title={t('blog_post.delete_post_tooltip')}>
+                                <span>🗑️</span><span>{t('blog_post.delete_post_button')}</span>
                             </button>
                         </div>
                     )}
                 </div>
 
                 <section className="comments-section">
-                    <h3>Comentarios</h3>
+                    <h3>{t('blog_post.comments_title')}</h3>
                     <div className="comments-list">
                         {comments.length > 0 ? (
                             <AnimatePresence>
@@ -268,7 +261,7 @@ const BlogPost = ({ post, currentUser, token, onDeletePost, onEditClick, showNot
                                 ))}
                             </AnimatePresence>
                         ) : (
-                            <p className="no-comments">Sé el primero en comentar esta crónica.</p>
+                            <p className="no-comments">{t('blog_post.no_comments')}</p>
                         )}
                     </div>
 
@@ -277,19 +270,19 @@ const BlogPost = ({ post, currentUser, token, onDeletePost, onEditClick, showNot
                             <textarea
                                 value={newComment}
                                 onChange={(e) => setNewComment(e.target.value)}
-                                placeholder="Añade tu verso a esta crónica..."
+                                placeholder={t('blog_post.add_comment_placeholder')}
                                 rows="2"
                                 className="comment-textarea"
                                 maxLength={500}
                             />
                             <div className="comment-input-controls">
                                 <span className="character-count">{newComment.length}/500</span>
-                                <button type="submit" className="comment-submit-button" disabled={!newComment.trim()}>Enviar</button>
+                                <button type="submit" className="comment-submit-button" disabled={!newComment.trim()}>{t('blog_post.send_button')}</button>
                             </div>
                         </form>
                     ) : (
                         <p className={!currentUser ? "login-prompt" : "verification-warning"}>
-                            {!currentUser ? "Inicia sesión para poder comentar." : "Necesitas verificar tu correo para poder comentar."}
+                            {!currentUser ? t('blog_post.login_to_comment') : t('blog_post.verify_to_comment')}
                         </p>
                     )}
                 </section>
