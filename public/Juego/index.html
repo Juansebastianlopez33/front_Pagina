@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+<<<<<<< HEAD
 <head>
     <meta charset="UTF-8"/>
     <link rel="manifest" href="manifest.webmanifest">
@@ -9,12 +10,25 @@
 
     <meta name="theme-color" content="#000000" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+=======
+
+<head>
+	<meta charset="UTF-8" />
+	<link rel="manifest" href="manifest.webmanifest">
+
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+	<meta name="theme-color" content="#000000" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+>>>>>>> 544a14f412003804d5e2dde516d404b34c3ee5f2
 
 	<style>
 		body {
 			margin: 0;
 			padding: 0;
 			background-color: #000000;
+<<<<<<< HEAD
             overflow: hidden;
 		}
         #canvasArea {
@@ -27,6 +41,19 @@
 	</style>
     <!-- Libs and GDJS core files : -->
 		<script src="libs/jshashtable.js" crossorigin="anonymous"></script>
+=======
+			overflow: hidden;
+		}
+
+		#canvasArea {
+			margin-left: auto;
+			margin-right: auto;
+			overflow: hidden;
+		}
+	</style>
+	<!-- Libs and GDJS core files : -->
+	<script src="libs/jshashtable.js" crossorigin="anonymous"></script>
+>>>>>>> 544a14f412003804d5e2dde516d404b34c3ee5f2
 	<script src="logger.js" crossorigin="anonymous"></script>
 	<script src="gd.js" crossorigin="anonymous"></script>
 	<script src="libs/rbush.js" crossorigin="anonymous"></script>
@@ -92,12 +119,19 @@
 	<script src="Extensions/BitmapText/bitmaptextruntimeobject-pixi-renderer.js" crossorigin="anonymous"></script>
 	<script src="Extensions/BitmapText/bitmaptextruntimeobject.js" crossorigin="anonymous"></script>
 	<script src="Extensions/DebuggerTools/debuggertools.js" crossorigin="anonymous"></script>
+<<<<<<< HEAD
 	<script src="Extensions/LinkedObjects/linkedobjects.js" crossorigin="anonymous"></script>
 	<script src="Extensions/PathfindingBehavior/PathTools.js" crossorigin="anonymous"></script>
 	<script src="Extensions/PathfindingBehavior/pathfindingobstacleruntimebehavior.js" crossorigin="anonymous"></script>
 	<script src="Extensions/PathfindingBehavior/pathfindingruntimebehavior.js" crossorigin="anonymous"></script>
 	<script src="Extensions/PrimitiveDrawing/pixi-graphics-extras/graphics-extras.min.js" crossorigin="anonymous"></script>
 	<script src="Extensions/PrimitiveDrawing/shapepainterruntimeobject-pixi-renderer.js" crossorigin="anonymous"></script>
+=======
+	<script src="Extensions/PrimitiveDrawing/pixi-graphics-extras/graphics-extras.min.js"
+		crossorigin="anonymous"></script>
+	<script src="Extensions/PrimitiveDrawing/shapepainterruntimeobject-pixi-renderer.js"
+		crossorigin="anonymous"></script>
+>>>>>>> 544a14f412003804d5e2dde516d404b34c3ee5f2
 	<script src="Extensions/PrimitiveDrawing/shapepainterruntimeobject.js" crossorigin="anonymous"></script>
 	<script src="Extensions/TextObject/textruntimeobject-pixi-renderer.js" crossorigin="anonymous"></script>
 	<script src="Extensions/TextObject/textruntimeobject.js" crossorigin="anonymous"></script>
@@ -154,13 +188,17 @@
 	<script src="code29.js" crossorigin="anonymous"></script>
 	<script src="code30.js" crossorigin="anonymous"></script>
 	<script src="code31.js" crossorigin="anonymous"></script>
+<<<<<<< HEAD
 	<script src="code32.js" crossorigin="anonymous"></script>
 	<script src="code33.js" crossorigin="anonymous"></script>
 	<script src="code34.js" crossorigin="anonymous"></script>
+=======
+>>>>>>> 544a14f412003804d5e2dde516d404b34c3ee5f2
 	<script src="data.js" crossorigin="anonymous"></script>
 
 
 </head>
+<<<<<<< HEAD
 <body>
 
     
@@ -185,3 +223,34 @@
 	</script>
 </body>
 </html>
+=======
+
+<body>
+
+
+	<script>
+
+		(function () {
+			//Initialization
+			var game = new gdjs.RuntimeGame(
+				gdjs.projectData,
+				gdjs.projectData.properties.useDeprecatedStarters ? {} : { showGDevelopSplash: false }
+			);
+
+			//Create a renderer
+			game.getRenderer().createStandardCanvas(document.body);
+
+			//Bind keyboards/mouse/touch events
+			game.getRenderer().bindStandardEvents(game.getInputManager(), window, document);
+
+			//Load all assets and start the game
+			game.loadAllAssets(function () {
+				game.startGameLoop();
+			});
+		})();
+
+	</script>
+</body>
+
+</html>
+>>>>>>> 544a14f412003804d5e2dde516d404b34c3ee5f2

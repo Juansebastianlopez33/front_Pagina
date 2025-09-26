@@ -13,15 +13,23 @@
     "@tailwindcss/vite": "^4.0.12",
     "axios": "^1.11.0",
     "framer-motion": "^12.12.1",
+<<<<<<< HEAD
     "i18next": "^25.5.2",
+=======
+>>>>>>> 544a14f412003804d5e2dde516d404b34c3ee5f2
     "jwt-decode": "^4.0.0",
     "lucide-react": "^0.511.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+<<<<<<< HEAD
     "react-i18next": "^15.7.3",
     "react-icons": "^5.5.0",
     "react-router-dom": "^7.4.1",
     "slugify": "^1.6.6",
+=======
+    "react-icons": "^5.5.0",
+    "react-router-dom": "^7.4.1",
+>>>>>>> 544a14f412003804d5e2dde516d404b34c3ee5f2
     "socket.io-client": "^4.8.1"
   },
   "devDependencies": {

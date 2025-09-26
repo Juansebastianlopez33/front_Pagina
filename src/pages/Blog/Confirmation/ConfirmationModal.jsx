@@ -1,4 +1,5 @@
 import React from 'react';
+<<<<<<< HEAD
 import { useTranslation } from 'react-i18next'; // Importar hook
 import './ConfirmationModal.css';
 
@@ -34,9 +35,33 @@ const ConfirmationModal = ({ isOpen, onClose, onConfirm, title, message }) => {
                 </div>
                 
                 <div className="modal-decoration-bottom"></div>
+=======
+import './ConfirmationModal.css'; // Usa tus estilos de modal
+
+const ConfirmationModal = ({ isOpen, onClose, onConfirm, title, message }) => {
+    if (!isOpen) return null;
+
+    return (
+        <div className="confirmation-overlay" onClick={onClose}>
+            <div className="confirmation-content" onClick={(e) => e.stopPropagation()}>
+                <h2>{title}</h2>
+                <p>{message}</p>
+                <div className="confirmation-buttons">
+                    <button onClick={onConfirm} className="confirm-button">
+                        Confirmar
+                    </button>
+                    <button onClick={onClose} className="cancel-button">
+                        Cancelar
+                    </button>
+                </div>
+>>>>>>> 544a14f412003804d5e2dde516d404b34c3ee5f2
             </div>
         </div>
     );
 };
 
+<<<<<<< HEAD
 export default ConfirmationModal;
+=======
+export default ConfirmationModal;
+>>>>>>> 544a14f412003804d5e2dde516d404b34c3ee5f2

@@ -71,26 +71,36 @@ body.modal-open {
   right: 1.5rem;
   background: transparent;
   border: none;
+<<<<<<< HEAD
   font-size: 1.8rem; /* <-- Tamaño reducido */
   font-weight: bold; /* <-- Más visible */
+=======
+  font-size: 2.5rem;
+>>>>>>> 544a14f412003804d5e2dde516d404b34c3ee5f2
   line-height: 1;
   color: #a0a0a0;
   cursor: pointer;
   transition: color 0.2s ease, transform 0.2s ease;
   z-index: 1001;
   padding: 0;
+<<<<<<< HEAD
   width: 35px; /* <-- Área de clic definida */
   height: 35px;
   display: flex; /* <-- Centra la 'X' perfectamente */
   align-items: center;
   justify-content: center;
   border-radius: 50%; /* <-- Fondo circular al pasar el mouse */
+=======
+>>>>>>> 544a14f412003804d5e2dde516d404b34c3ee5f2
 }
 
 .game-setup-modal-close-button:hover {
   color: #ffffff;
   transform: scale(1.1);
+<<<<<<< HEAD
   background-color: rgba(255, 255, 255, 0.1); /* <-- Mejor feedback visual */
+=======
+>>>>>>> 544a14f412003804d5e2dde516d404b34c3ee5f2
 }
 
 /* Animaciones del Modal */

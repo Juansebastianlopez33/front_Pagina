@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useState, useEffect, useRef } from 'react';
 
 /**
@@ -42,14 +43,41 @@ function TypingEffect({ text, speed = 150, onComplete }) {
                 // Llamamos al callback de onComplete si existe
                 if (onCompleteRef.current) {
                     onCompleteRef.current();
+=======
+import React, { useState, useEffect } from 'react';
+
+// Añadimos la nueva propiedad 'onComplete'
+function TypingEffect({ text, speed = 150, onComplete }) {
+    const [displayedText, setDisplayedText] = useState('');
+
+    useEffect(() => {
+        let i = 0;
+        setDisplayedText('');
+
+        const typingInterval = setInterval(() => {
+            if (i < text.length) {
+                setDisplayedText((prev) => prev + text.charAt(i));
+                i++;
+            } else {
+                clearInterval(typingInterval);
+                // Cuando termina, llamamos a la función onComplete si existe
+                if (onComplete) {
+                    onComplete();
+>>>>>>> 544a14f412003804d5e2dde516d404b34c3ee5f2
                 }
             }
         }, speed);
 
         return () => {
+<<<<<<< HEAD
             clearInterval(intervalId);
         };
     }, [text, speed]); // El efecto se reinicia solo si el texto o la velocidad cambian
+=======
+            clearInterval(typingInterval);
+        };
+    }, [text, speed, onComplete]);
+>>>>>>> 544a14f412003804d5e2dde516d404b34c3ee5f2
 
     return <span>{displayedText}</span>;
 }

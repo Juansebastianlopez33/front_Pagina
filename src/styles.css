@@ -946,6 +946,7 @@ html, body {
   line-height: 1.5;
   color: #3B2F2F;
 }
+<<<<<<< HEAD
 /* Contenedor para los botones de idioma */
 .language-selector {
   display: flex;
@@ -1078,6 +1079,8 @@ html, body {
     display: none;
   }
 }
+=======
+>>>>>>> 544a14f412003804d5e2dde516d404b34c3ee5f2
 
 /* Animación opcional para que aparezca suavemente */
 @keyframes fadeIn {

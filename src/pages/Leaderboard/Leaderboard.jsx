@@ -1,9 +1,16 @@
 import React from "react";
+<<<<<<< HEAD
 import PropTypes from "prop-types";
 import { useTranslation } from 'react-i18next'; // Importar hook
 import "./Leaderboard.css";
 
 // Los datos de ejemplo se mantienen, ya que en un futuro vendrán de una API.
+=======
+import PropTypes from "prop-types"; 
+import "./Leaderboard.css";
+
+// --- Los datos y el componente Leaderboard se mantienen igual ---
+>>>>>>> 544a14f412003804d5e2dde516d404b34c3ee5f2
 const leaderboardData = {
     principiante: [
         { id: 'b1', name: "NoviceHero", time: 180 },
@@ -29,8 +36,11 @@ const leaderboardData = {
 };
 
 const Leaderboard = ({ title, players }) => {
+<<<<<<< HEAD
     const { t } = useTranslation(); // Inicializar hook
 
+=======
+>>>>>>> 544a14f412003804d5e2dde516d404b34c3ee5f2
     const getRankIcon = (index) => {
         if (index === 0) return '🏆';
         if (index === 1) return '🥈';
@@ -45,8 +55,13 @@ const Leaderboard = ({ title, players }) => {
                 <thead>
                     <tr>
                         <th>#</th>
+<<<<<<< HEAD
                         <th>{t('leaderboard.player_header')}</th>
                         <th>{t('leaderboard.time_header')}</th>
+=======
+                        <th>Jugador</th>
+                        <th>Tiempo(s)</th>
+>>>>>>> 544a14f412003804d5e2dde516d404b34c3ee5f2
                     </tr>
                 </thead>
                 <tbody>
@@ -73,6 +88,7 @@ Leaderboard.propTypes = {
 };
 
 
+<<<<<<< HEAD
 const Leaderboards = () => {
     const { t } = useTranslation(); // Inicializar hook
 
@@ -82,6 +98,16 @@ const Leaderboards = () => {
                 <Leaderboard title={t('leaderboard.beginner_title')} players={leaderboardData.principiante} />
                 <Leaderboard title={t('leaderboard.intermediate_title')} players={leaderboardData.intermedio} />
                 <Leaderboard title={t('leaderboard.advanced_title')} players={leaderboardData.avanzado} />
+=======
+// --- Componente Principal Simplificado ---
+const Leaderboards = () => {
+    return (
+        <div className="leaderboards-wrapper">
+            <div className="leaderboards-container">
+                <Leaderboard title="Principiante" players={leaderboardData.principiante} />
+                <Leaderboard title="Intermedio" players={leaderboardData.intermedio} />
+                <Leaderboard title="Avanzado" players={leaderboardData.avanzado} />
+>>>>>>> 544a14f412003804d5e2dde516d404b34c3ee5f2
             </div>
         </div>
     );
